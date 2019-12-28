@@ -29,6 +29,7 @@ class App extends React.Component {
 				<h1>我的待办</h1>
 				<div className="inputWrapper">
 					<TodoInput content={this.state.newTodo}
+							onChange={this.changeTitle.bind(this)}
 							onSubmit={this.addTodo.bind(this)}
 					/>
 				</div>
@@ -37,6 +38,13 @@ class App extends React.Component {
 				</ol>
   	  </div>
 		);
+	}
+
+	changeTitle(event){
+		this.setState({
+			newTodo: event.target.value,
+			todoList: this.state.todoList
+		})
 	}
 
 	addTodo(event){
