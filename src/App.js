@@ -1,5 +1,4 @@
 import React, { Constructor } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
@@ -7,13 +6,12 @@ import 'normalize.css';
 import './reset.css';
 
 class App extends React.Component {
-	constructor(props){
-		super(props)
+	constructor(){
+		super()
 		this.state = {
-			newTodo: 'test',
+			newTodo: '',
 			todoList: [
-				{id: 1, title: '第一个待办'},
-				{id: 2, title: '第二个待办'}
+
 			]
 		}
 	}
@@ -21,7 +19,7 @@ class App extends React.Component {
 	render(){
 		let todos = this.state.todoList.map((item, index)=>{
 			return (
-				<li>
+				<li key={index}>
 					<TodoItem todo={item} />
 				</li>
 			) 
@@ -30,14 +28,35 @@ class App extends React.Component {
   	  <div className="App">
 				<h1>我的待办</h1>
 				<div className="inputWrapper">
-					<TodoInput content={this.state.newTodo} />
+					<TodoInput content={this.state.newTodo}
+							onSubmit={this.addTodo.bind(this)}
+					/>
 				</div>
 				<ol>
 					{todos}
 				</ol>
   	  </div>
-			  	);
+		);
+	}
+
+	addTodo(event){
+		this.state.todoList.push({
+			id: idMaker(),
+			title: event.target.value,
+			status: null,
+			deleted: false
+		})
+		this.setState({
+			newTodo: '',
+			todoList: this.state.todoList
+		})
 	}
 }
 
 export default App;
+
+let id=0;
+function idMaker(){
+	id += 1
+	return id
+}
