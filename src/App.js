@@ -4,22 +4,14 @@ import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 import 'normalize.css';
 import './reset.css';
-import * as localStore from './localStore';
 
-var AV = require('leancloud-storage');
-
-AV.init({
-appId: "j5fPHDH1A8Kq3DoCnnRc0fku-gzGzoHsz",
-appKey: "QV1V60qhFMK7uogBXI3qvMEj",
-serverURLs: "https://leancloud.cn"
-});
 
 class App extends React.Component {
 	constructor(){
 		super()
 		this.state = {
 			newTodo: '',
-			todoList: localStore.load('todoList') || []
+			todoList: []
 		}
 	}
 
@@ -52,7 +44,7 @@ class App extends React.Component {
 	}
 
 	componentDidUpdate(){
-		localStore.save('todoList', this.state.todoList)
+
 	}
 
 	delete(event, todo){
