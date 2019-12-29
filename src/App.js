@@ -4,15 +4,14 @@ import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 import 'normalize.css';
 import './reset.css';
+import * as localStore from './localStore';
 
 class App extends React.Component {
 	constructor(){
 		super()
 		this.state = {
 			newTodo: '',
-			todoList: [
-
-			]
+			todoList: localStore.load('todoList') || []
 		}
 	}
 
@@ -42,6 +41,10 @@ class App extends React.Component {
 				</ol>
   	  </div>
 		);
+	}
+
+	componentDidUpdate(){
+		localStore.save('todoList', this.state.todoList)
 	}
 
 	delete(event, todo){
