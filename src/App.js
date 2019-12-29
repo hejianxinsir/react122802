@@ -17,10 +17,12 @@ class App extends React.Component {
 	}
 
 	render(){
-		let todos = this.state.todoList.map((item, index)=>{
+		let todos = this.state.todoList.filter((item)=>!item.deleted)
+			.map((item, index)=>{
 			return (
 				<li key={index}>
 					<TodoItem todo={item} 
+							onDelete={this.delete.bind(this)}
 							onToggle={this.toggle.bind(this)}
 					/>
 				</li>
@@ -35,11 +37,16 @@ class App extends React.Component {
 							onSubmit={this.addTodo.bind(this)}
 					/>
 				</div>
-				<ol>
+				<ol className="todoList">
 					{todos}
 				</ol>
   	  </div>
 		);
+	}
+
+	delete(event, todo){
+		todo.deleted = true
+		this.setState(this.state)
 	}
 
 	toggle(e, todo){
