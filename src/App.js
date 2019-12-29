@@ -6,6 +6,23 @@ import 'normalize.css';
 import './reset.css';
 import * as localStore from './localStore';
 
+var AV = require('leancloud-storage');
+
+var APP_ID = "j5fPHDH1A8Kq3DoCnnRc0fku-gzGzoHsz"
+var APP_KEY = "QV1V60qhFMK7uogBXI3qvMEj"
+AV.init({
+appId: "j5fPHDH1A8Kq3DoCnnRc0fku-gzGzoHsz",
+appKey: "QV1V60qhFMK7uogBXI3qvMEj",
+serverURLs: "https://xxx.example.com"
+});
+
+var xxx	= AV.Object.extend('TestObject');
+var testObject = new xxx();
+testObject.set('words', 'Hello world!');
+testObject.save().then(function (testObject) {
+  console.log('保存成功。')
+})
+	
 class App extends React.Component {
 	constructor(){
 		super()
