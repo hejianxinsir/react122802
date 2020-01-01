@@ -54,3 +54,10 @@
 	padding: 0.2em;
 }
 
+.UserDialog .forgotPassword > h3 {
+	padding: 1em;
+}
+.UserDialog .forgotPasswor > form {
+	padding: 0 1em 1em;	
+}
+
